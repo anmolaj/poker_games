@@ -1,10 +1,20 @@
 AJ:
-  names: ["AJ"]
-Jay:
-  names: ["JayZ"]
-Sam:
-  names: ["Sam"]
-Prasham:
-  names: ["Prasham"]
+  names:
+  - AJ
+Adit:
+  names:
+  - Adit
 DK:
-  names: ["DK","Dk"]
+  names:
+  - DK
+  - Dk
+Jay:
+  names:
+  - JayZ
+  - Jay
+Prasham:
+  names:
+  - Prasham
+Sam:
+  names:
+  - Sam
