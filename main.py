@@ -38,16 +38,20 @@ class PokerBalance:
 				print(F"Existing names {self.name_mapping.keys()}")
 				player_og_name = input(F"Enter mapping for {player}: ")
 				self.new_players[player_og_name] = self.new_players.get(player_og_name, []) + [player]
-			end_player_stats[player] = player_info["net"]
+			player_og_name = self.name_mapping[player]
+
+			end_player_stats[player_og_name] = round(player_info["net"] / 10.0 + \
+											   end_player_stats.get(player_og_name, 0),1)
+			print(F" {end_player_stats[player_og_name]}, {round(player_info['net'] / 10.0, 1)}")
 		return end_player_stats
 
 	def set_new_player_mapping(self):
 		if len(self.new_players) == 0:
-			logging.INFO("No new players")
+			logging.info("No new players")
 			return
 		logging.info(f'Adding {len(self.new_players)} players')
 		for player, names in self.new_players.items():
-			self.yml[player] = self.yml.get(player, {'names':[]})
+			self.yml[player] = self.yml.get(player, {'names': []})
 			self.yml[player]["names"] = self.yml[player]["names"] + names
 
 		with open(self.mapping_file, 'w') as file:
@@ -55,9 +59,7 @@ class PokerBalance:
 
 
 if __name__ == '__main__':
-	url = "https://www.pokernow.club/games/MJQ9NGwGTWj2_wjwKtLAA3QBA"
-	#input("Enter URL: ")
+	url = input("Enter URL: ")
 	pp = PokerBalance(url)
 	print(pp.get_end_stats())
 	pp.set_new_player_mapping()
-
